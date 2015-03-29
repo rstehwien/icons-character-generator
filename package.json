@@ -1,0 +1,17 @@
+{
+  "name": "icons-character-generator",
+  "version": "0.1.0",
+  "description": "Create characters for ICONS Assembled",
+  "main": "icons.js",
+  "scripts": {
+    "start": "echo \"Error: no start specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "console": "node console.js"
+  },
+  "author": "Robert Stehwien",
+  "license": "ISC",
+  "dependencies": {
+    "cli-table2": "^0.1.5",
+    "lodash": "^3.6.0"
+  }
+}

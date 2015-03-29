@@ -5,7 +5,7 @@ var iconsData = {
   "originRollTwiceName": "Unearthly",
   "originRollTwiceChance": 2,
   "minimumAttributes": 20,
-  "minimumCharacterPoints": 45,
+  "minimumCharacterPoints": 40,
   "tables": {
     "origin":[
       {"max": 4, "name": "Trained", "specialities": 2, "option": "+2 specialities (already added)\nTrade power for +2 specialities", "optionPoints": 0},

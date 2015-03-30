@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Table = require('cli-table2');
-var iconsData = require('./iconsData.js');
+var IconsConfig = require('./IconsConfig.js');
 
 function tablePick(table, roll) {
   var pick = table[0];
@@ -42,7 +42,7 @@ function rollTableNoRepeat(table, items) {
 }
 
 function rollOrigin(origins) {
-  var table = iconsData['tables']['origin'];
+  var table = IconsConfig['tables']['origin'];
   var origin = _.clone(rollTableNoRepeat(table, origins));
   delete origin['max'];
   return origin;
@@ -50,7 +50,7 @@ function rollOrigin(origins) {
 
 function rollOrigins() {
   var origins = [rollOrigin(origins)];
-  if (origins[0].name == iconsData['originRollTwiceName'] && _.random(1,6) <= iconsData['originRollTwiceChance']) {
+  if (origins[0].name == IconsConfig['originRollTwiceName'] && _.random(1,6) <= IconsConfig['originRollTwiceChance']) {
     origins.push(rollOrigin(origins));
     origins.push(rollOrigin(origins));
     origins.shift();
@@ -59,7 +59,7 @@ function rollOrigins() {
 }
 
 function rollAbilityLevel(name) {
-  var level = rollTable(iconsData['tables']['level']);
+  var level = rollTable(IconsConfig['tables']['level']);
   var ability = {"name": name, "level": level.value, "adjective": level.adjective};
   return ability;
 }
@@ -67,9 +67,9 @@ function rollAbilityLevel(name) {
 function rollAttributes(origin) {
   var attrib;
   var total = 0;
-  while (total < iconsData['minimumAttributes']) {
+  while (total < IconsConfig['minimumAttributes']) {
     attrib = [];
-    _.forEach(iconsData['attributes'], function (a) {
+    _.forEach(IconsConfig['attributes'], function (a) {
       attrib.push(rollAbilityLevel(a));
     });
     total = _.sum(attrib, 'level');
@@ -79,7 +79,7 @@ function rollAttributes(origin) {
 
 function rollPowers(origin) {
   var powers = [];
-  var num = rollTable(iconsData['tables']['numPowers']).value;
+  var num = rollTable(IconsConfig['tables']['numPowers']).value;
   _.forEach(origin, function(o) {
     if (_.isString(o.powers)) {
       powers.push(rollAbilityLevel(o.powers));
@@ -89,7 +89,7 @@ function rollPowers(origin) {
     }
   });
 
-  var table = iconsData['tables']['powers'];
+  var table = IconsConfig['tables']['powers'];
   for (var i = 0; i < num; i++) {
     powers.push(rollAbilityLevel(rollTableNoRepeat(table, powers).name));
   }
@@ -99,14 +99,14 @@ function rollPowers(origin) {
 
 function rollSpecialities(origin) {
   var specialities = [];
-  var num = rollTable(iconsData['tables']['numSpecialities']).value;
+  var num = rollTable(IconsConfig['tables']['numSpecialities']).value;
   _.forEach(origin, function(o) {
     if (_.isNumber(o.specialities)) {
       num += o.specialities;
     }
   });
 
-  var table = iconsData['tables']['specialities'];
+  var table = IconsConfig['tables']['specialities'];
   for (var i = 0; i < num; i++) {
     specialities.push({"name": rollTableNoRepeat(table, specialities).name});
   }
@@ -176,7 +176,7 @@ function IconsCharacterCreator(opt) {
 function rollCharacter() {
   var character;
   var total = 0;
-  while (total < iconsData['minimumCharacterPoints']) {
+  while (total < IconsConfig['minimumCharacterPoints']) {
     var character = {};
     character.origin = rollOrigins();
     character['attributes'] = rollAttributes(character.origin);

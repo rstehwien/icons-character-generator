@@ -1,5 +1,5 @@
-var IconsGen = require('./src/js/icons.js');
+var IconsGenerator = require('./src/js/lib/IconsGenerator.js');
 
 for (var i = 0; i < 5; i++) {
-  console.log(IconsGen.formatCharacterTable(IconsGen.rollCharacter()));
+  console.log(IconsGenerator.formatCharacterTable(IconsGenerator.rollCharacter()));
 }

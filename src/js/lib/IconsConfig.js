@@ -1,6 +1,6 @@
 'use strict';
 
-var iconsData = {
+var IconsConfig = {
   "attributes": ["Prowess", "Coordination", "Strength", "Intellect", "Awareness", "Willpower"],
   "originRollTwiceName": "Unearthly",
   "originRollTwiceChance": 2,
@@ -202,4 +202,4 @@ var iconsData = {
   }
 }
 
-module.exports = iconsData;
+module.exports = IconsConfig;

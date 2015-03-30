@@ -11,7 +11,8 @@ var configAtomify = {
     entry: 'src/js/app.js',
     alias: 'bundle.js',
     output: 'dist/bundle.js',
-    transform: 'reactify'
+    transform: 'reactify',
+    minify: false
   },
 	server: {
 		st: {
@@ -42,6 +43,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('serve', ['copy'], function() {
+  configAtomify.js.minify = false;
   configAtomify.js.debug = true;
   atomify(configAtomify);
 });

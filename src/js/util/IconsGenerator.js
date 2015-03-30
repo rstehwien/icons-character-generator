@@ -195,7 +195,7 @@ function formatCharacterTable(character) {
         'top': '-' , 'top-mid': '+' , 'top-left': '+' , 'top-right': '+',
         'bottom': '-' , 'bottom-mid': '+' , 'bottom-left': '+' , 'bottom-right': '+',
         'left': '|' , 'right': '|'  , 'middle': '|',
-        'mid': '-', 'left-mid': '|', 'mid-mid': '+', 'right-mid': '|'
+        'mid': '-', 'left-mid': '+', 'mid-mid': '+', 'right-mid': '+'
       }
     });
 

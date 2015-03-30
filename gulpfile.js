@@ -12,7 +12,7 @@ var configAtomify = {
     alias: 'bundle.js',
     output: 'dist/bundle.js',
     transform: 'reactify',
-    minify: false
+    minify: true
   },
 	server: {
 		st: {

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var IconsGenerator = require('../lib/IconsGenerator.js');
+var IconsGenerator = require('../util/IconsGenerator.js');
 
 var CharacterView = React.createClass({
   render: function() {

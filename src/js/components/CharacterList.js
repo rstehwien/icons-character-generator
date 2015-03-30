@@ -2,7 +2,7 @@
 
 var React = require('react');
 var _ = require('lodash');
-var IconsGenerator = require('../lib/IconsGenerator.js');
+var IconsGenerator = require('../util/IconsGenerator.js');
 var CharacterView = require('./CharacterView.js');
 
 var CharacterList = React.createClass({

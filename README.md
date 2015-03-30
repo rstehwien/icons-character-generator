@@ -10,4 +10,4 @@
 * Options at the bottom detail origin customizations
 * Will not generate characters with attributes worth less than 20 or a total value of 40 (will be adjustable later).  Just didn't want to roll "duds".
 
-[Running Here][http://arcanearcade.com/icons-gen/]
+[Click Here To Run Generator](http://arcanearcade.com/icons-gen/)

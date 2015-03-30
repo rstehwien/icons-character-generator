@@ -10,7 +10,7 @@ var CharacterList = React.createClass({
     var characters = [];
     var num = _.parseInt(this.props.number);
     for (var i = 0; i < num; i++) {
-      characters.push(<CharacterView character={IconsGenerator.rollCharacter()}/>);
+      characters.push(<CharacterView character={IconsGenerator.rollCharacter()} key={i}/>);
     }
 
     return <div>{characters}</div>;

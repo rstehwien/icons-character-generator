@@ -2,10 +2,8 @@
 
 var alt = require('../alt');
 
-class ConfigActions {
-  updateConfig(config) {
-    this.dispatch(config);
+module.exports = alt.createActions(class ConfigActions {
+  constructor() {
+    this.generateActions('updateConfig');
   }
-}
-
-module.exports = alt.createActions(ConfigActions);
+});

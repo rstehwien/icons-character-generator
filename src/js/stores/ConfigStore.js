@@ -2,23 +2,18 @@
 
 var alt = require('../alt');
 var ConfigActions = require('../actions/ConfigActions');
-var IconsGenerator = require('../util/IconsGenerator.js');
-var IconsConfig = require('../util/IconsConfig.js');
+var IconsGenerator = require('../util/IconsGenerator');
+var IconsConfig = require('../util/IconsConfig');
 
-class ConfigStore {
+module.exports = alt.createStore(class ConfigStore {
   constructor() {
-    this.config = IconsConfig;
-    this.generator = new IconsGenerator(this.config);
-
-    this.bindListeners({
-      handleUpdateConfig: ConfigActions.UPDATE_CONFIG
-    });
+    this.updateConfig(IconsConfig);
+    this.bindActions(ConfigActions);
   }
 
-  handleUpdateConfig(config) {
+  updateConfig(config) {
     this.config = config;
     this.generator = new IconsGenerator(this.config);
+    this.characters = this.generator.rollCharacters();
   }
-}
-
-module.exports = alt.createStore(ConfigStore, 'ConfigStore');
+});

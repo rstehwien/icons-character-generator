@@ -1,11 +1,11 @@
 'use strict';
 
 var React = require('react');
-var IconsGenerator = require('../util/IconsGenerator.js');
+var IconsFormatter = require('../util/IconsFormatter.js');
 
 var CharacterView = React.createClass({
   render: function() {
-    return <div><pre>{IconsGenerator.formatCharacterTable(this.props.character)}</pre></div>;
+    return <div><pre>{IconsFormatter.formatCharacterTable(this.props.character)}</pre></div>;
   }
 });
 

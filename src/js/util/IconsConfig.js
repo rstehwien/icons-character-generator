@@ -1,6 +1,7 @@
 'use strict';
 
 var IconsConfig = {
+  "numberCharacters": 5,
   "attributes": ["Prowess", "Coordination", "Strength", "Intellect", "Awareness", "Willpower"],
   "originRollTwiceName": "Unearthly",
   "originRollTwiceChance": 2,

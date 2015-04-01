@@ -3,8 +3,6 @@
 var React = require('react');
 var _ = require('lodash');
 var IconsFormatter = require('../util/IconsFormatter');
-var Table = require('react-bootstrap/lib/Table');
-var Panel = require('react-bootstrap/lib/Panel');
 
 module.exports = React.createClass({
   render: function() {
@@ -23,8 +21,8 @@ module.exports = React.createClass({
       return <tr key={"o_"+idx}><td colSpan="3">{item}</td></tr>;
     });
 
-    return <Panel bsStyle='primary' className="col-sm-6 col-md-4">
-      <Table condensed hover bordered>
+    return <div className="col-sm-6 col-md-4"><div className="panel panel-primary">
+      <table className="table table-bordered table-condensed table-hover">
         <tbody>
           <tr className="info">
             <td><strong>Origin</strong></td><td colSpan="2">{_.map(character.origin, 'name').join(', ')}</td>
@@ -46,7 +44,7 @@ module.exports = React.createClass({
           </tr>
           {options}
         </tbody>
-      </Table>
-    </Panel>;
+      </table>
+    </div></div>;
   }
 });;

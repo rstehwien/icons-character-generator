@@ -34,7 +34,8 @@ function formatCharacterTable(character) {
   table.push([{colSpan:3, hAlign:'center', content: 'OPTIONS'}]);
   table.push([{colSpan:3, content: _.flatten(_.map(character.origin, 'options')).join('\n')}]);
 
-  return table.toString();
+  var str = table.toString();
+  return str;
 };
 
 module.exports = {

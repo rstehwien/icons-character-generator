@@ -4,6 +4,6 @@ var alt = require('../alt');
 
 module.exports = alt.createActions(class AppActions {
   constructor() {
-    this.generateActions('showConfig', 'showCharacters');
+    this.generateActions('showConfig', 'showCharacters', 'toggleFormat');
   }
 });

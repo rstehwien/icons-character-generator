@@ -1,10 +1,57 @@
 'use strict';
 
 var React = require('react');
+var ConfigActions = require('../actions/ConfigActions');
+var AppActions = require('../actions/AppActions');
+var ListenerMixin = require('alt/mixins/ListenerMixin')
+var AppStore = require('../stores/AppStore')
 
 module.exports = React.createClass({
+  mixins: [ListenerMixin],
+
+  getInitialState: function() {
+    return AppStore.getState()
+  },
+
+  componentDidMount: function() {
+    this.listenTo(AppStore, this.onChange)
+  },
+
+  onChange: function() {
+    this.setState(this.getInitialState())
+  },
+
+  addCharacter: function() {
+    ConfigActions.addCharacter();
+  },
+
+  removeAll: function() {
+    ConfigActions.deleteAllCharacters();
+  },
+
+  rerollAll: function() {
+    ConfigActions.rerollAllCharacters();
+  },
+
+  showCharacter: function() {
+    AppActions.showCharacters();
+  },
+
+  showConfig: function() {
+    AppActions.showConfig();
+  },
+
   render: function() {
-    var ischar=false;
+    var ischar = this.state.isShowCharacter;
+
+    var toolbar = [];
+    if (ischar) {
+      toolbar.push(<li key="0"><a href="#" onClick={this.addCharacter}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>)
+      toolbar.push(<li key="1"><a href="#" onClick={this.removeAll}><span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a></li>)
+      toolbar.push(<li key="2"><a href="#" onClick={this.rerollAll}><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>)
+    }
+    toolbar.push(<li key="3"><a href="https://github.com/rstehwien/icons-character-generator" target="_blank"><span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a></li>);
+
     return <nav className="navbar navbar-default">
       <div className="container-fluid">
         <div className="navbar-header">
@@ -18,12 +65,11 @@ module.exports = React.createClass({
         </div>
         <div className="collapse navbar-collapse" id="navbar">
           <ul className="nav navbar-nav">
-            <li className={ischar?'active':null}><a href="#">Character</a></li>
-            <li className={!ischar?'active':null}><a href="#">Config</a></li>
+            <li className={ischar?'active':null} onClick={this.showCharacter}><a href="#">Character</a></li>
+            <li className={!ischar?'active':null} onClick={this.showConfig}><a href="#">Config</a></li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
-            <li><a href="#"><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>
-            <li><a href="#"><span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a></li>
+            {toolbar}
           </ul>
         </div>
       </div>

@@ -16,9 +16,15 @@ function tablePick(table, roll) {
   return pick;
 }
 
+function rollThemBones(max) {
+  if (max != 12 && max != 6) throw "Max must be 6 or 12 not '"+max+"'";
+  return max == 12 ? _.random(1,6)+_.random(1,6) : _.random(1,6);
+}
+
 function rollTable(table) {
-  var max = _.max(table, 'max').max;
-  var roll = max == 12 ? _.random(1,6)+_.random(1,6) : _.random(1,6);
+  if (!_.isObject(table)) throw "Missing Table";
+  var max = (_.max(table, 'max')).max;
+  var roll = rollThemBones(max);
   var pick = tablePick(table, roll);
   if (_.has(pick, 'table')) {
     return rollTable(pick.table);
@@ -40,8 +46,18 @@ function rollTableNoRepeat(table, items) {
   return pick;
 }
 
+function getTable(config, name) {
+  if (!_.has(config, 'tables')){
+    throw "Missing tables";
+  }
+  if (!_.has(config['tables'], name)) {
+    throw "Missing '"+name+"' table";
+  }
+  return config['tables'][name];
+}
+
 function rollOrigin(config, origins) {
-  var table = config['tables']['origin'];
+  var table = getTable(config, 'origin');
   var origin = _.clone(rollTableNoRepeat(table, origins));
   delete origin['max'];
   return origin;
@@ -49,7 +65,9 @@ function rollOrigin(config, origins) {
 
 function rollOrigins(config) {
   var origins = [rollOrigin(config, origins)];
-  if (origins[0].name == config['originRollTwiceName'] && _.random(1,6) <= config['originRollTwiceChance']) {
+  var twiceName = config['originRollTwiceName'] || 'Unearthly';
+  var twiceChance = config['originRollTwiceChance'] || 2;
+  if (origins[0].name == twiceName && _.random(1,6) <= twiceChance) {
     origins.push(rollOrigin(config, origins));
     origins.push(rollOrigin(config, origins));
     origins.shift();
@@ -58,15 +76,17 @@ function rollOrigins(config) {
 }
 
 function rollAbilityLevel(config, name) {
-  var level = rollTable(config['tables']['level']);
+  var level = rollTable(getTable(config, 'level'));
   var ability = {"name": name, "level": level.value, "adjective": level.adjective};
   return ability;
 }
 
 function rollAttributes(config, origin) {
+  if (!_.has(config, 'attributes')) throw "Missing attributes list";
   var attrib;
   var total = 0;
-  while (total < config['minimumAttributes']) {
+  var minAttr = config['minimumAttributes'] || 20;
+  while (total < minAttr) {
     attrib = [];
     _.forEach(config['attributes'], function (a) {
       attrib.push(rollAbilityLevel(config, a));
@@ -78,7 +98,7 @@ function rollAttributes(config, origin) {
 
 function rollPowers(config, origin) {
   var powers = [];
-  var num = rollTable(config['tables']['numPowers']).value;
+  var num = rollTable(getTable(config, 'numPowers')).value;
   _.forEach(origin, function(o) {
     if (_.isString(o.powers)) {
       powers.push(rollAbilityLevel(config, o.powers));
@@ -88,7 +108,7 @@ function rollPowers(config, origin) {
     }
   });
 
-  var table = config['tables']['powers'];
+  var table = getTable(config, 'powers');
   for (var i = 0; i < num; i++) {
     powers.push(rollAbilityLevel(config, rollTableNoRepeat(table, powers).name));
   }
@@ -98,14 +118,14 @@ function rollPowers(config, origin) {
 
 function rollSpecialities(config, origin) {
   var specialities = [];
-  var num = rollTable(config['tables']['numSpecialities']).value;
+  var num = rollTable(getTable(config, 'numSpecialities')).value;
   _.forEach(origin, function(o) {
     if (_.isNumber(o.specialities)) {
       num += o.specialities;
     }
   });
 
-  var table = config['tables']['specialities'];
+  var table = getTable(config, 'specialities');
   for (var i = 0; i < num; i++) {
     specialities.push({"name": rollTableNoRepeat(table, specialities).name});
   }
@@ -168,7 +188,8 @@ function IconsGenerator(config) {
 IconsGenerator.prototype.rollCharacter = function() {
   var character;
   var total = 0;
-  while (total < this.config['minimumCharacterPoints']) {
+  var minCharPoints = this.config['minimumCharacterPoints'] || 1;
+  while (total < minCharPoints) {
     var character = {};
     character.origin = rollOrigins(this.config);
     character['attributes'] = rollAttributes(this.config, character.origin);
@@ -180,8 +201,7 @@ IconsGenerator.prototype.rollCharacter = function() {
   return character;
 };
 
-IconsGenerator.prototype.rollCharacters = function() {
-  var num = this.config.numberCharacters||1;
+IconsGenerator.prototype.rollCharacters = function(num) {
   var characters = [];
   for (var i = 0; i < num; i++) {
     characters.push(this.rollCharacter());

@@ -5,7 +5,7 @@ var IconsGenerator = require('./src/js/util/IconsGenerator');
 var IconsFormatter = require('./src/js/util/IconsFormatter');
 
 var gen = new IconsGenerator();
-var characters = gen.rollCharacters();
+var characters = gen.rollCharacters(1000);
 _.forEach(characters, function(character){
   console.log(IconsFormatter.formatCharacterTable(character));
 });

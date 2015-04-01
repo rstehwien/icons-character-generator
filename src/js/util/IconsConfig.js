@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-  "numberCharacters": 5,
   "attributes": ["Prowess", "Coordination", "Strength", "Intellect", "Awareness", "Willpower"],
   "originRollTwiceName": "Unearthly",
   "originRollTwiceChance": 2,
@@ -95,8 +94,8 @@ module.exports = {
         {"max":3, "table":[
           {"max":1, "name": "Affliction"},
           {"max":2, "name": "Binding"},
-          {"max":3, "name": "Blast"},
-          {"max":4, "name": "Strike"}
+          {"max":4, "name": "Blast"},
+          {"max":6, "name": "Strike"}
         ]},
         {"max":6, "table":[
           {"max":1, "name": "Aura"},

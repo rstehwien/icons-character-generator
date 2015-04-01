@@ -1,6 +1,6 @@
 'use strict';
 
 var React = require('react');
-var CharacterList = require('./components/CharacterList.js');
+var MainView = require('./components/MainView');
 
-React.render(<CharacterList number="5"/>, document.getElementById('main'));
+React.render(<MainView/>, document.getElementById('main'));

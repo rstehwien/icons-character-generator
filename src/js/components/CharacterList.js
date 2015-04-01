@@ -5,9 +5,14 @@ var React = require('react');
 var ListenerMixin = require('alt/mixins/ListenerMixin')
 var ConfigStore = require('../stores/ConfigStore')
 var CharacterView = require('./CharacterView');
+var MasonryMixin = require('react-masonry-mixin');
+
+var masonryOptions = {
+    transitionDuration: 0
+};
 
 module.exports = React.createClass({
-  mixins: [ListenerMixin],
+  mixins: [ListenerMixin, MasonryMixin('masonryContainer', masonryOptions)],
 
   getInitialState() {
     return ConfigStore.getState()
@@ -26,6 +31,6 @@ module.exports = React.createClass({
       return <CharacterView character={character} key={index}/>;
     });
 
-    return <div>{characters}</div>;
+    return <div ref="masonryContainer">{characters}</div>;
   }
 });

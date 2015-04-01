@@ -32,7 +32,7 @@ function formatCharacterTable(character) {
   });
 
   table.push([{colSpan:3, hAlign:'center', content: 'OPTIONS'}]);
-  table.push([{colSpan:3, content: _.map(character.origin, 'option').join('\n')}]);
+  table.push([{colSpan:3, content: _.flatten(_.map(character.origin, 'options')).join('\n')}]);
 
   return table.toString();
 };

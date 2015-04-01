@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var IconsConfig = require('./IconsConfig.js');
+var IconsConfig = require('./IconsConfig');
 
 function tablePick(table, roll) {
   var pick = table[0];

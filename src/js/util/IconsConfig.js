@@ -1,6 +1,6 @@
 'use strict';
 
-var IconsConfig = {
+module.exports = {
   "numberCharacters": 5,
   "attributes": ["Prowess", "Coordination", "Strength", "Intellect", "Awareness", "Willpower"],
   "originRollTwiceName": "Unearthly",
@@ -9,12 +9,12 @@ var IconsConfig = {
   "minimumCharacterPoints": 40,
   "tables": {
     "origin":[
-      {"max": 4, "name": "Trained", "specialities": 2, "option": "+2 specialities (already added)\nTrade power for +2 specialities", "optionPoints": 0},
-      {"max": 6, "name": "Transformed", "option": "+2 to one ability", "optionPoints": 2},
-      {"max": 7, "name": "Birthright", "powers": 1, "option": "+1 Bonus Power (already added)\nDrop bonus power for +2 to another power", "optionPoints": 0},
-      {"max": 9, "name": "Gimmick", "option": "+2 to one mental attribute", "optionPoints": 2},
-      {"max": 10, "name": "Artificial", "powers": "Life Support", "option": "Life Support (already added)\nStrength +2\nTrade power to set Life Support to 10", "optionPoints": 2},
-      {"max": 12, "name": "Unearthly", "option": "Increase two abilities +2", "optionPoints": 4}
+      {"max": 4, "name": "Trained", "specialities": 2, "options": ["+2 specialities (already added)","Trade power for +2 specialities"], "optionPoints": 0},
+      {"max": 6, "name": "Transformed", "options": ["+2 to one ability"], "optionPoints": 2},
+      {"max": 7, "name": "Birthright", "powers": 1, "options": ["+1 Bonus Power (already added)","Drop bonus power for +2 to another power"], "optionPoints": 0},
+      {"max": 9, "name": "Gimmick", "options": ["+2 to one mental attribute"], "optionPoints": 2},
+      {"max": 10, "name": "Artificial", "powers": "Life Support", "options": ["Life Support (already added)","Strength +2","Trade power to set Life Support to 10"], "optionPoints": 2},
+      {"max": 12, "name": "Unearthly", "options": ["Increase two abilities +2"], "optionPoints": 4}
     ],
     "level": [
       {"max": 2, "value": 1, "adjective": "Weak"},
@@ -201,6 +201,4 @@ var IconsConfig = {
       ]}
     ]
   }
-}
-
-module.exports = IconsConfig;
+};

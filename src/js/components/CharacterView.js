@@ -1,13 +1,52 @@
 'use strict';
 
 var React = require('react');
-var IconsFormatter = require('../util/IconsFormatter.js');
+var _ = require('lodash');
+var IconsFormatter = require('../util/IconsFormatter');
+var Table = require('react-bootstrap/lib/Table');
+var Panel = require('react-bootstrap/lib/Panel');
 
-var CharacterView = React.createClass({
+module.exports = React.createClass({
   render: function() {
-    return <div><pre>{IconsFormatter.formatCharacterTable(this.props.character)}</pre></div>;
+    var character = this.props.character;
+
+    var attributes = _.map(character['attributes'], function(item, idx) {
+      return <tr key={"a_"+idx}><td>{item.name}</td><td>{item.adjective}</td><td>{item.level}</td></tr>;
+    });
+    var powers = _.map(character['powers'], function(item, idx) {
+      return <tr key={"p_"+idx}><td>{item.name}</td><td>{item.adjective}</td><td>{item.level}</td></tr>;
+    });
+    var specialities = _.map(character['specialities'], function(item, idx) {
+      return <tr key={"s_"+idx}><td colSpan="3">{item.name}</td></tr>;
+    });
+    var options = _.flatten(_.map(character.origin, 'options')).map(function(item, idx){
+      return <tr key={"o_"+idx}><td colSpan="3">{item}</td></tr>;
+    });
+
+    return <Panel bsStyle='primary' className="col-sm-6 col-md-4">
+      <Table condensed hover bordered>
+        <tbody>
+          <tr className="info">
+            <td><strong>Origin</strong></td><td colSpan="2">{_.map(character.origin, 'name').join(', ')}</td>
+          </tr>
+          <tr className="info">
+            <td colSpan="3" className="text-center"><strong>Attributes</strong></td>
+          </tr>
+          {attributes}
+          <tr className="info">
+            <td colSpan="3" className="text-center"><strong>Powers</strong></td>
+          </tr>
+          {powers}
+          <tr className="info">
+            <td colSpan="3" className="text-center"><strong>Specialities</strong></td>
+          </tr>
+          {specialities}
+          <tr className="info">
+            <td colSpan="3" className="text-center"><strong>Options</strong></td>
+          </tr>
+          {options}
+        </tbody>
+      </Table>
+    </Panel>;
   }
-});
-
-
-module.exports = CharacterView;
+});;

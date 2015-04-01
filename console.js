@@ -1,8 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
-var IconsGenerator = require('./src/js/util/IconsGenerator.js');
-var IconsFormatter = require('./src/js/util/IconsFormatter.js');
+var IconsGenerator = require('./src/js/util/IconsGenerator');
+var IconsFormatter = require('./src/js/util/IconsFormatter');
 
 var gen = new IconsGenerator();
 var characters = gen.rollCharacters();

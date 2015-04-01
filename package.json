@@ -14,7 +14,8 @@
     "cli-table2": "^0.1.5",
     "lodash": "^3.6.0",
     "react": "^0.13.1",
-    "react-bootstrap": "^0.20.0"
+    "react-bootstrap": "^0.20.0",
+    "react-masonry-mixin": "^0.5.6"
   },
   "devDependencies": {
     "atomify": "^6.1.0",

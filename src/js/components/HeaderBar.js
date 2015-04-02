@@ -41,17 +41,12 @@ module.exports = React.createClass({
     AppActions.showConfig();
   },
 
-  toggleFormat: function() {
-    AppActions.toggleFormat();
-  },
-
   render: function() {
     var ischar = this.state.isShowCharacter;
 
     var toolbar = [];
     if (ischar) {
-      var format = this.state.isFormatText ? "glyphicon glyphicon-font" : "glyphicon glyphicon-th";
-      toolbar.push(<li key="0" onClick={this.toggleFormat}><a href="#"><span className={format} aria-hidden="true"></span> Format</a></li>)
+      toolbar.push(<li key="0"><a href="#" data-toggle="modal" data-target="#charactersTextModal"><span className="glyphicon glyphicon-font" aria-hidden="true"></span> Text</a></li>)
       toolbar.push(<li key="1" onClick={this.addCharacter}><a href="#"><span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a></li>)
       toolbar.push(<li key="2" onClick={this.removeAll}><a href="#"><span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Remove All</a></li>)
       toolbar.push(<li key="3" onClick={this.rerollAll}><a href="#"><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reroll All</a></li>)

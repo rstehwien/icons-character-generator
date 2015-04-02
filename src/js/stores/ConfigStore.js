@@ -23,7 +23,9 @@ module.exports = alt.createStore(class ConfigStore {
   }
 
   deleteCharacter(idx) {
-    this.characters.splice(idx, 1);
+    if (this.characters.length > 1) {
+      this.characters.splice(idx, 1);
+    }
   }
 
   rerollCharacter(idx) {
@@ -36,14 +38,12 @@ module.exports = alt.createStore(class ConfigStore {
 
   rerollAllCharacters() {
     var len = this.characters.length;
-    var characters = [];
     for (var i = 0; i < len; i++) {
-      characters.push(this.generator.rollCharacter());
+      this.characters.splice(i, 1, this.generator.rollCharacter());
     }
-    this.characters = characters;
   }
 
   deleteAllCharacters() {
-    this.characters = [];
+    this.characters.splice(0, this.characters.length-1);
   }
 });

@@ -3,6 +3,7 @@
 var React = require('react');
 var CharacterList = require('./CharacterList');
 var ConfigView = require('./ConfigView');
+var CharactersTextModal = require('./CharactersTextModal');
 var HeaderBar = require('./HeaderBar');
 var ListenerMixin = require('alt/mixins/ListenerMixin')
 var AppStore = require('../stores/AppStore')
@@ -24,6 +25,6 @@ module.exports = React.createClass({
 
   render: function() {
     var view = this.state.isShowCharacter ? <CharacterList/> : <ConfigView/>
-    return <div><HeaderBar/>{view}</div>;
+    return <div><HeaderBar/>{view}<CharactersTextModal/></div>;
   }
 });;

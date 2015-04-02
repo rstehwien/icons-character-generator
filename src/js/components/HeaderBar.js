@@ -66,8 +66,8 @@ module.exports = React.createClass({
         </div>
         <div className="collapse navbar-collapse" id="navbar">
           <ul className="nav navbar-nav">
-            <li className={ischar?'active':null} onClick={this.showCharacter}><a href="#">Character</a></li>
-            <li className={!ischar?'active':null} onClick={this.showConfig}><a href="#">Config</a></li>
+            <li className={ischar?'active':null} onClick={this.showCharacter}><a href="#"><span className="glyphicon glyphicon-user" aria-hidden="true"></span> Character</a></li>
+            <li className={!ischar?'active':null} onClick={this.showConfig}><a href="#"><span className="glyphicon glyphicon-cog" aria-hidden="true"></span> Config</a></li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
             {toolbar}
